@@ -1,0 +1,75 @@
+﻿<Window x:Class="AccessPath.UI.BuildingAccessibilityWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AccessPath.UI"
+        mc:Ignorable="d"
+        Title="AccessPath - BuildingAccessibility" Height="600" Width="900" Background="{DynamicResource WindowBackgroundBrush}" Foreground="{DynamicResource TextBrush}">
+    <Grid Margin="20">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0"
+                    Margin="0,0,0,15">
+
+            <TextBlock Text="Manage Building Accessibility"
+                       FontSize="18"
+                       FontWeight="Bold"
+                       Margin="0,0,0,10"/>
+
+            <TextBlock Text="Building"/>
+
+            <ComboBox x:Name="BuildingComboBox"
+                      Width="300"
+                      HorizontalAlignment="Left"
+                      Margin="0,5"/>
+
+            <TextBlock Text="Accessibility Feature"/>
+
+            <TextBox x:Name="AccessibilityFeatureTextBox"
+                      Width="300"
+                      HorizontalAlignment="Left"
+                      Margin="0,5"/>
+
+            <TextBlock Text="Description"/>
+
+            <TextBox x:Name="AccessibilityDescriptionTextBox"
+                      Width="300"
+                      HorizontalAlignment="Left"
+                      Margin="0,5"/>
+
+            <StackPanel Orientation="Horizontal"
+                        Margin="0,10,0,10">
+
+                <Button Content="Add"
+                        Width="100"
+                        Margin="0,0,10,0"
+                        Click="AddAccessibilityButton_Click"/>
+
+                <Button Content="Update"
+                        Width="100"
+                        Margin="0,0,10,0"
+                        Click="UpdateAccessibilityButton_Click"/>
+
+                <Button Content="Delete"
+                        Width="100"
+                        Margin="0,0,10,0"
+                        Click="DeleteAccessibilityButton_Click"/>
+
+            </StackPanel>
+
+        </StackPanel>
+
+        <DataGrid x:Name="AccessibilityDataGrid"
+                  Grid.Row="1"
+                  AutoGenerateColumns="True"
+                  IsReadOnly="True"
+                  SelectionMode="Single"
+                  SelectionChanged="AccessibilityDataGrid_SelectionChanged"/>
+
+    </Grid>
+</Window>
