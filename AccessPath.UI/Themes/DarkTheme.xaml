@@ -6,7 +6,7 @@
          COLORS
          ===================================================== -->
 
-    <!-- Main window -->
+    <!-- Main Window -->
     <SolidColorBrush x:Key="WindowBackgroundBrush"
                      Color="#18181B"/>
 
@@ -33,7 +33,7 @@
                      Color="#3F3F46"/>
 
 
-    <!-- AccessPath / USC-inspired accent -->
+    <!-- AccessPath Accent -->
     <SolidColorBrush x:Key="AccentBrush"
                      Color="#CC2E40"/>
 
@@ -169,13 +169,165 @@
                 Value="1"/>
 
         <Setter Property="Padding"
-                Value="6"/>
+                Value="10,6"/>
 
         <Setter Property="FontSize"
                 Value="14"/>
 
+        <Setter Property="Cursor"
+                Value="Hand"/>
+
+        <Setter Property="Template">
+
+            <Setter.Value>
+
+                <ControlTemplate TargetType="ComboBox">
+
+                    <Grid>
+
+                        <!-- Selected Value Area -->
+
+                        <Border x:Name="ComboBoxBorder"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="4">
+
+                            <Grid>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="35"/>
+                                </Grid.ColumnDefinitions>
+
+
+                                <!-- Selected Item -->
+
+                                <ContentPresenter Grid.Column="0"
+                                                  Margin="{TemplateBinding Padding}"
+                                                  VerticalAlignment="Center"
+                                                  HorizontalAlignment="Left"
+                                                  Content="{TemplateBinding SelectionBoxItem}"
+                                                  ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
+                                                  ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
+                                                  TextElement.Foreground="{TemplateBinding Foreground}"/>
+
+
+                                <!-- Dropdown Arrow -->
+
+                                <Path Grid.Column="1"
+                                      Width="10"
+                                      Height="6"
+                                      HorizontalAlignment="Center"
+                                      VerticalAlignment="Center"
+                                      Fill="{TemplateBinding Foreground}"
+                                      Data="M 0 0 L 5 5 L 10 0 Z"/>
+
+                            </Grid>
+
+                        </Border>
+
+
+                        <!-- Makes Entire ComboBox Clickable -->
+
+                        <ToggleButton Background="Transparent"
+                                      BorderThickness="0"
+                                      Focusable="False"
+                                      ClickMode="Press"
+                                      IsChecked="{Binding IsDropDownOpen,
+                                          RelativeSource={RelativeSource TemplatedParent},
+                                          Mode=TwoWay}">
+
+                            <ToggleButton.Template>
+
+                                <ControlTemplate TargetType="ToggleButton">
+
+                                    <Border Background="Transparent"/>
+
+                                </ControlTemplate>
+
+                            </ToggleButton.Template>
+
+                        </ToggleButton>
+
+
+                        <!-- Dropdown -->
+
+                        <Popup x:Name="PART_Popup"
+                               Placement="Bottom"
+                               IsOpen="{TemplateBinding IsDropDownOpen}"
+                               AllowsTransparency="True"
+                               Focusable="False"
+                               PopupAnimation="Fade">
+
+                            <Border Background="{DynamicResource ControlBackgroundBrush}"
+                                    BorderBrush="{DynamicResource BorderBrush}"
+                                    BorderThickness="1"
+                                    CornerRadius="4"
+                                    Margin="0,2,0,0"
+                                    Width="{Binding ActualWidth,
+                                        RelativeSource={RelativeSource TemplatedParent}}">
+
+                                <ScrollViewer MaxHeight="300"
+                                              HorizontalScrollBarVisibility="Disabled"
+                                              VerticalScrollBarVisibility="Auto">
+
+                                    <ItemsPresenter/>
+
+                                </ScrollViewer>
+
+                            </Border>
+
+                        </Popup>
+
+                    </Grid>
+
+
+                    <!-- ComboBox Triggers -->
+
+                    <ControlTemplate.Triggers>
+
+                        <Trigger Property="IsMouseOver"
+                                 Value="True">
+
+                            <Setter TargetName="ComboBoxBorder"
+                                    Property="BorderBrush"
+                                    Value="{DynamicResource AccentBrush}"/>
+
+                        </Trigger>
+
+                        <Trigger Property="IsKeyboardFocusWithin"
+                                 Value="True">
+
+                            <Setter TargetName="ComboBoxBorder"
+                                    Property="BorderBrush"
+                                    Value="{DynamicResource AccentBrush}"/>
+
+                        </Trigger>
+
+                        <Trigger Property="IsEnabled"
+                                 Value="False">
+
+                            <Setter TargetName="ComboBoxBorder"
+                                    Property="Opacity"
+                                    Value="0.5"/>
+
+                        </Trigger>
+
+                    </ControlTemplate.Triggers>
+
+                </ControlTemplate>
+
+            </Setter.Value>
+
+        </Setter>
+
     </Style>
 
+
+    <!-- =====================================================
+         COMBOBOX ITEMS
+         ===================================================== -->
 
     <Style TargetType="ComboBoxItem">
 
@@ -186,7 +338,13 @@
                 Value="{DynamicResource ControlForegroundBrush}"/>
 
         <Setter Property="Padding"
-                Value="8,6"/>
+                Value="10,7"/>
+
+        <Setter Property="Cursor"
+                Value="Hand"/>
+
+        <Setter Property="HorizontalContentAlignment"
+                Value="Stretch"/>
 
         <Style.Triggers>
 
@@ -268,7 +426,9 @@
     </Style>
 
 
-    <!-- DataGrid Rows -->
+    <!-- =====================================================
+         DATAGRID ROWS
+         ===================================================== -->
 
     <Style TargetType="DataGridRow">
 
@@ -296,7 +456,9 @@
     </Style>
 
 
-    <!-- DataGrid Cells -->
+    <!-- =====================================================
+         DATAGRID CELLS
+         ===================================================== -->
 
     <Style TargetType="DataGridCell">
 
@@ -330,7 +492,9 @@
     </Style>
 
 
-    <!-- DataGrid Headers -->
+    <!-- =====================================================
+         DATAGRID HEADERS
+         ===================================================== -->
 
     <Style TargetType="DataGridColumnHeader">
 
