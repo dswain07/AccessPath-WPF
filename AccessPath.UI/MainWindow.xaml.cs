@@ -11,13 +11,40 @@ namespace AccessPath.UI
     public partial class MainWindow : Window
     {
         private readonly BuildingRepository repository;
+        private readonly AddressRepository addressRepository;
+
         public MainWindow()
         {
             InitializeComponent();
 
             repository = new BuildingRepository();
+            addressRepository = new AddressRepository();
 
             BuildingDataGrid.ItemsSource = repository.GetAllBuildings();
+
+            var addresses = addressRepository.GetAllAddresses();
+
+            AddressComboBox.ItemsSource = addresses;
+
+            AddressComboBox.DisplayMemberPath = "DisplayAddress";
+
+            AddressComboBox.SelectedValuePath = "AddressID";
+
+        }
+        
+        private void ClearBuildingForm()
+        {
+            BuildingNameTextBox.Clear();
+            BuildingTypeTextBox.Clear();
+            OpeningHoursTextBox.Clear();
+            ClosingHoursTextBox.Clear();
+            LatitudeTextBox.Clear();
+            LongitudeTextBox.Clear();
+            DescriptionTextBox.Clear();
+
+            AddressComboBox.SelectedIndex = -1;
+
+            BuildingDataGrid.SelectedItem = null;
         }
 
         private void SearchButton_Click(object sender, RoutedEventArgs e)
@@ -103,12 +130,14 @@ namespace AccessPath.UI
                 MessageBox.Show("Please enter a valid longitude.");
                 return;
             }
-            
-            if (!int.TryParse(AddressIDTextBox.Text, out int addressID))
+
+            if (AddressComboBox.SelectedValue == null)
             {
-                MessageBox.Show("Please enter a valid Address ID.");
+                MessageBox.Show("Please select an address.");
                 return;
             }
+
+            int addressID = (int)AddressComboBox.SelectedValue;
 
             Building building = new Building();
             building.BuildingName = BuildingNameTextBox.Text;
@@ -134,14 +163,7 @@ namespace AccessPath.UI
 
             MessageBox.Show("Building added successfully.");
 
-            BuildingNameTextBox.Clear();
-            BuildingTypeTextBox.Clear();
-            OpeningHoursTextBox.Clear();
-            ClosingHoursTextBox.Clear();
-            LatitudeTextBox.Clear();
-            LongitudeTextBox.Clear();
-            DescriptionTextBox.Clear();
-            AddressIDTextBox.Clear();
+            ClearBuildingForm();
         }
 
         private void BuildingDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -162,7 +184,7 @@ namespace AccessPath.UI
 
                 DescriptionTextBox.Text = selectedBuilding.BuildingDescription ?? string.Empty;
 
-                AddressIDTextBox.Text = selectedBuilding.AddressID.ToString();
+                AddressComboBox.SelectedValue = selectedBuilding.AddressID;
 
             }
         }
@@ -223,11 +245,13 @@ namespace AccessPath.UI
                 return;
             }
 
-            if (!int.TryParse(AddressIDTextBox.Text, out int addressID))
+            if (AddressComboBox.SelectedValue == null)
             {
-                MessageBox.Show("Please enter a valid Address ID.");
+                MessageBox.Show("Please select an address.");
                 return;
             }
+
+            int addressID = (int)AddressComboBox.SelectedValue;
 
             Building building = new Building();
             building.BuildingID = selectedBuilding.BuildingID;
@@ -274,6 +298,8 @@ namespace AccessPath.UI
                 repository.DeleteBuilding(selectedBuilding.BuildingID);
 
                 BuildingDataGrid.ItemsSource = repository.GetAllBuildings();
+
+                ClearBuildingForm();
 
                 MessageBox.Show("Building deleted successfully.");
             }

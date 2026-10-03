@@ -1,100 +1,360 @@
-﻿<ResourceDictionary 
+﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
+    <!-- =====================================================
+         COLORS
+         ===================================================== -->
+
+    <!-- Main window -->
     <SolidColorBrush x:Key="WindowBackgroundBrush"
-                     Color="#1E1E1E"/>
+                     Color="#18181B"/>
 
     <SolidColorBrush x:Key="TextBrush"
-                     Color="White"/>
+                     Color="#F4F4F5"/>
 
+    <SolidColorBrush x:Key="MutedTextBrush"
+                     Color="#A1A1AA"/>
+
+
+    <!-- Controls -->
     <SolidColorBrush x:Key="ControlBackgroundBrush"
-                     Color="#2D2D30"/>
+                     Color="#27272A"/>
 
     <SolidColorBrush x:Key="ControlForegroundBrush"
-                     Color="White"/>
+                     Color="#F4F4F5"/>
 
+
+    <!-- Cards -->
+    <SolidColorBrush x:Key="CardBackgroundBrush"
+                     Color="#202023"/>
+
+    <SolidColorBrush x:Key="BorderBrush"
+                     Color="#3F3F46"/>
+
+
+    <!-- AccessPath / USC-inspired accent -->
+    <SolidColorBrush x:Key="AccentBrush"
+                     Color="#CC2E40"/>
+
+    <SolidColorBrush x:Key="AccentHoverBrush"
+                     Color="#E03B4E"/>
+
+
+    <!-- DataGrid -->
     <SolidColorBrush x:Key="GridBackgroundBrush"
-                     Color="#252526"/>
+                     Color="#202023"/>
 
     <SolidColorBrush x:Key="GridLineBrush"
-                     Color="#555555"/>
+                     Color="#3F3F46"/>
+
+    <SolidColorBrush x:Key="SelectionBrush"
+                     Color="#73000A"/>
+
+
+    <!-- =====================================================
+         TEXT
+         ===================================================== -->
 
     <Style TargetType="TextBlock">
+
         <Setter Property="Foreground"
                 Value="{DynamicResource TextBrush}"/>
+
     </Style>
+
+
+    <!-- =====================================================
+         TEXTBOX
+         ===================================================== -->
 
     <Style TargetType="TextBox">
+
         <Setter Property="Background"
                 Value="{DynamicResource ControlBackgroundBrush}"/>
+
         <Setter Property="Foreground"
                 Value="{DynamicResource ControlForegroundBrush}"/>
+
+        <Setter Property="BorderBrush"
+                Value="{DynamicResource BorderBrush}"/>
+
+        <Setter Property="BorderThickness"
+                Value="1"/>
+
+        <Setter Property="Padding"
+                Value="8,5"/>
+
+        <Setter Property="FontSize"
+                Value="14"/>
+
+        <Setter Property="VerticalContentAlignment"
+                Value="Center"/>
+
+        <Setter Property="CaretBrush"
+                Value="{DynamicResource ControlForegroundBrush}"/>
+
     </Style>
+
+
+    <!-- =====================================================
+         BUTTON
+         ===================================================== -->
 
     <Style TargetType="Button">
+
         <Setter Property="Background"
-                Value="{DynamicResource ControlBackgroundBrush}"/>
+                Value="{DynamicResource AccentBrush}"/>
+
         <Setter Property="Foreground"
-                Value="{DynamicResource ControlForegroundBrush}"/>
+                Value="White"/>
+
+        <Setter Property="BorderThickness"
+                Value="0"/>
+
         <Setter Property="Padding"
-                Value="8,4"/>
+                Value="14,7"/>
+
+        <Setter Property="FontWeight"
+                Value="SemiBold"/>
+
+        <Setter Property="Cursor"
+                Value="Hand"/>
+
+        <Setter Property="VerticalContentAlignment"
+                Value="Center"/>
+
+        <Setter Property="HorizontalContentAlignment"
+                Value="Center"/>
+
+        <Style.Triggers>
+
+            <Trigger Property="IsMouseOver"
+                     Value="True">
+
+                <Setter Property="Background"
+                        Value="{DynamicResource AccentHoverBrush}"/>
+
+            </Trigger>
+
+            <Trigger Property="IsEnabled"
+                     Value="False">
+
+                <Setter Property="Opacity"
+                        Value="0.5"/>
+
+            </Trigger>
+
+        </Style.Triggers>
+
     </Style>
+
+
+    <!-- =====================================================
+         COMBOBOX
+         ===================================================== -->
 
     <Style TargetType="ComboBox">
+
         <Setter Property="Background"
                 Value="{DynamicResource ControlBackgroundBrush}"/>
+
         <Setter Property="Foreground"
                 Value="{DynamicResource ControlForegroundBrush}"/>
+
+        <Setter Property="BorderBrush"
+                Value="{DynamicResource BorderBrush}"/>
+
+        <Setter Property="BorderThickness"
+                Value="1"/>
+
+        <Setter Property="Padding"
+                Value="6"/>
+
+        <Setter Property="FontSize"
+                Value="14"/>
+
     </Style>
+
 
     <Style TargetType="ComboBoxItem">
+
         <Setter Property="Background"
                 Value="{DynamicResource ControlBackgroundBrush}"/>
+
         <Setter Property="Foreground"
                 Value="{DynamicResource ControlForegroundBrush}"/>
+
         <Setter Property="Padding"
-                Value="6"/>
+                Value="8,6"/>
+
+        <Style.Triggers>
+
+            <Trigger Property="IsHighlighted"
+                     Value="True">
+
+                <Setter Property="Background"
+                        Value="{DynamicResource AccentBrush}"/>
+
+                <Setter Property="Foreground"
+                        Value="White"/>
+
+            </Trigger>
+
+            <Trigger Property="IsSelected"
+                     Value="True">
+
+                <Setter Property="Background"
+                        Value="{DynamicResource SelectionBrush}"/>
+
+                <Setter Property="Foreground"
+                        Value="White"/>
+
+            </Trigger>
+
+        </Style.Triggers>
+
     </Style>
+
+
+    <!-- =====================================================
+         DATAGRID
+         ===================================================== -->
 
     <Style TargetType="DataGrid">
+
         <Setter Property="Background"
                 Value="{DynamicResource GridBackgroundBrush}"/>
+
         <Setter Property="Foreground"
                 Value="{DynamicResource ControlForegroundBrush}"/>
+
+        <Setter Property="BorderBrush"
+                Value="{DynamicResource BorderBrush}"/>
+
+        <Setter Property="BorderThickness"
+                Value="1"/>
+
+        <Setter Property="RowHeight"
+                Value="38"/>
+
+        <Setter Property="ColumnHeaderHeight"
+                Value="40"/>
+
         <Setter Property="GridLinesVisibility"
-                Value="All"/>
+                Value="Horizontal"/>
+
         <Setter Property="HorizontalGridLinesBrush"
                 Value="{DynamicResource GridLineBrush}"/>
-        <Setter Property="VerticalGridLinesBrush"
-                Value="{DynamicResource GridLineBrush}"/>
+
+        <Setter Property="HeadersVisibility"
+                Value="Column"/>
+
+        <Setter Property="CanUserAddRows"
+                Value="False"/>
+
+        <Setter Property="CanUserDeleteRows"
+                Value="False"/>
+
+        <Setter Property="SelectionMode"
+                Value="Single"/>
+
+        <Setter Property="SelectionUnit"
+                Value="FullRow"/>
+
+        <Setter Property="RowHeaderWidth"
+                Value="0"/>
+
     </Style>
+
+
+    <!-- DataGrid Rows -->
 
     <Style TargetType="DataGridRow">
+
         <Setter Property="Background"
                 Value="{DynamicResource GridBackgroundBrush}"/>
+
         <Setter Property="Foreground"
                 Value="{DynamicResource ControlForegroundBrush}"/>
+
+        <Style.Triggers>
+
+            <Trigger Property="IsSelected"
+                     Value="True">
+
+                <Setter Property="Background"
+                        Value="{DynamicResource SelectionBrush}"/>
+
+                <Setter Property="Foreground"
+                        Value="White"/>
+
+            </Trigger>
+
+        </Style.Triggers>
+
     </Style>
+
+
+    <!-- DataGrid Cells -->
 
     <Style TargetType="DataGridCell">
+
         <Setter Property="Background"
-                Value="{DynamicResource GridBackgroundBrush}"/>
+                Value="Transparent"/>
+
         <Setter Property="Foreground"
                 Value="{DynamicResource ControlForegroundBrush}"/>
-        <Setter Property="BorderBrush"
-                Value="{DynamicResource GridLineBrush}"/>
+
+        <Setter Property="BorderThickness"
+                Value="0"/>
+
+        <Setter Property="Padding"
+                Value="8,4"/>
+
+        <Style.Triggers>
+
+            <Trigger Property="IsSelected"
+                     Value="True">
+
+                <Setter Property="Background"
+                        Value="{DynamicResource SelectionBrush}"/>
+
+                <Setter Property="Foreground"
+                        Value="White"/>
+
+            </Trigger>
+
+        </Style.Triggers>
+
     </Style>
 
+
+    <!-- DataGrid Headers -->
+
     <Style TargetType="DataGridColumnHeader">
+
         <Setter Property="Background"
-                Value="{DynamicResource ControlBackgroundBrush}"/>
+                Value="{DynamicResource CardBackgroundBrush}"/>
+
         <Setter Property="Foreground"
                 Value="{DynamicResource ControlForegroundBrush}"/>
+
         <Setter Property="FontWeight"
-                Value="Bold"/>
+                Value="SemiBold"/>
+
         <Setter Property="Padding"
-                Value="6"/>
+                Value="10"/>
+
+        <Setter Property="BorderBrush"
+                Value="{DynamicResource BorderBrush}"/>
+
+        <Setter Property="BorderThickness"
+                Value="0,0,0,1"/>
+
+        <Setter Property="HorizontalContentAlignment"
+                Value="Left"/>
+
     </Style>
 
 </ResourceDictionary>

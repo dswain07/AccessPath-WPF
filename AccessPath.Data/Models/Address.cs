@@ -11,5 +11,13 @@ namespace AccessPath.Data.Models
         public string City { get; set; } = string.Empty;
         public string State { get; set; } = string.Empty;
         public string Zipcode { get; set; } = string.Empty;
+
+        public string DisplayAddress
+        {
+            get
+            {
+                return $"{Street}, {City}, {State} {Zipcode}";
+            }
+        }
     }
 }

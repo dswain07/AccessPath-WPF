@@ -5,152 +5,490 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AccessPath.UI"
         mc:Ignorable="d"
-        Title="AccessPath" Height="600" Width="1000" Background="{DynamicResource WindowBackgroundBrush}" Foreground="{DynamicResource TextBrush}">
-    <Grid Margin="20">
+
+        Title="AccessPath"
+        Height="720"
+        Width="1250"
+        MinHeight="650"
+        MinWidth="1000"
+
+        WindowStartupLocation="CenterScreen"
+
+        Background="{DynamicResource WindowBackgroundBrush}"
+        Foreground="{DynamicResource TextBrush}">
+
+    <Grid Margin="28">
+
+        <!-- =====================================================
+             MAIN ROWS
+             ===================================================== -->
 
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0"
-                    Orientation="Horizontal"
-                    Margin="0,0,0,15">
 
-            <TextBox x:Name="SearchTextBox"
-                     Width="300"
-                     Height="30"
-                     Margin="0,0,10,0"/>
+        <!-- =====================================================
+             HEADER
+             ===================================================== -->
 
-            <Button x:Name="SearchButton"
-                    Content="Search"
-                    Width="100"
-                    Height="30"
-                    Click="SearchButton_Click"/>
+        <Grid Grid.Row="0"
+              Margin="0,0,0,22">
 
-            <Button x:Name="RoutesButton"
-                    Content="Manage Routes"
-                    Width="120"
-                    Height="30"
-                    Margin="10,0,0,0"
-                    Click="RoutesButton_Click"/>
-
-            <Button x:Name="AccessibilityButton"
-                    Content="Accessibility"
-                    Width="120"
-                    Height="30"
-                    Margin="10,0,0,0"
-                    Click="AccessibilityButton_Click"/>
-
-            <Button x:Name="AdminButton"
-                    Content="Administration"
-                    Width="120"
-                    Height="30"
-                    Margin="10,0,0,0"
-                    Click="AdminButton_Click"/>
-
-            <Button x:Name="SettingsButton"
-                    Content="Settings"
-                    Width="100"
-                    Height="30"
-                    Margin="10,0,0,0"
-                    Click="SettingsButton_Click"/>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
 
 
-        </StackPanel>
+            <!-- Application Identity -->
 
-        <StackPanel Grid.Row="1"
-                    Margin="0,0,0,15">
+            <StackPanel Grid.Column="0">
 
-            <TextBlock Text="Add Building"
-                       FontSize="18"
-                       FontWeight="Bold"
-                       Margin="0,0,0,10"/>
-            
-            <!-- Inputs Here-->
+                <TextBlock Text="ACCESSPATH"
+                           FontSize="30"
+                           FontWeight="Bold"
+                           Foreground="{DynamicResource AccentBrush}"/>
 
-            <TextBlock Text="Building Name"/>
-            <TextBox x:Name="BuildingNameTextBox"
-                     Width="250"
-                     Margin="0,5"
-                     HorizontalAlignment="Left"/>
+                <TextBlock Text="UofSC Campus Accessibility and Route Management"
+                           FontSize="14"
+                           Foreground="{DynamicResource MutedTextBrush}"
+                           Margin="0,4,0,0"/>
 
-            <TextBlock Text="Building Type"/>
-            <TextBox x:Name="BuildingTypeTextBox"
-                     Width="250"
-                     Margin="0,5"
-                     HorizontalAlignment="Left"/>
+            </StackPanel>
 
-            <TextBlock Text="Opening Hours"/>
-            <TextBox x:Name="OpeningHoursTextBox"
-                     Width="250"
-                     Margin="0,5"
-                     HorizontalAlignment="Left"/>
 
-            <TextBlock Text="Closing Hours"/>
-            <TextBox x:Name="ClosingHoursTextBox"
-                     Width="250"
-                     Margin="0,5"
-                     HorizontalAlignment="Left"/>
+            <!-- Small Application Label -->
 
-            <TextBlock Text="Latitude"/>
-            <TextBox x:Name="LatitudeTextBox"
-                     Width="250"
-                     Margin="0,5"
-                     HorizontalAlignment="Left"/>
+            <Border Grid.Column="1"
+                    Background="{DynamicResource CardBackgroundBrush}"
+                    BorderBrush="{DynamicResource BorderBrush}"
+                    BorderThickness="1"
+                    CornerRadius="8"
+                    Padding="12,7"
+                    VerticalAlignment="Center">
 
-            <TextBlock Text="Longitude"/>
-            <TextBox x:Name="LongitudeTextBox"
-                     Width="250"
-                     Margin="0,5"
-                     HorizontalAlignment="Left"/>
+                <TextBlock Text="Campus Management"
+                           FontSize="12"
+                           FontWeight="SemiBold"
+                           Foreground="{DynamicResource MutedTextBrush}"/>
 
-            <TextBlock Text="Description"/>
-            <TextBox x:Name="DescriptionTextBox"
-                     Width="250"
-                     Margin="0,5"
-                     HorizontalAlignment="Left"/>
+            </Border>
 
-            <TextBlock Text="Address ID"/>
-            <TextBox x:Name="AddressIDTextBox"
-                     Width="250"
-                     Margin="0,5"
-                     HorizontalAlignment="Left"/>
+        </Grid>
 
-            <Button x:Name="AddBuildingButton"
-                    Content="Add Building"
-                    Width="120"
-                    Height="30"
-                    HorizontalAlignment="Left"
-                    Margin="0,10,0,10"
-                    Click="AddBuildingButton_Click"/>
 
-            <Button x:Name="UpdateBuildingButton"
-                    Content="Update Building"
-                    Width="120"
-                    Height="30"
-                    HorizontalAlignment="Left"
-                    Margin="0,5,0,10"
-                    Click="UpdateBuildingButton_Click"/>
+        <!-- =====================================================
+             NAVIGATION
+             ===================================================== -->
 
-            <Button x:Name="DeleteBuildingButton"
-                    Content="Delete Building"
-                    Width="120"
-                    Height="30"
-                    HorizontalAlignment="Left"
-                    Margin="0,5,0,10"
-                    Click="DeleteBuildingButton_Click"/>
+        <Border Grid.Row="1"
+                Background="{DynamicResource CardBackgroundBrush}"
+                BorderBrush="{DynamicResource BorderBrush}"
+                BorderThickness="1"
+                CornerRadius="10"
+                Padding="12"
+                Margin="0,0,0,18">
 
-        </StackPanel>
+            <StackPanel Orientation="Horizontal">
 
-        <DataGrid x:Name="BuildingDataGrid"
-                  Grid.Row="2"
-                  AutoGenerateColumns="True"
-                  IsReadOnly="True"
-                  SelectionMode="Single"
-                  SelectionChanged="BuildingDataGrid_SelectionChanged"/>
+                <Button x:Name="RoutesButton"
+                        Content="Manage Routes"
+                        Width="135"
+                        Height="36"
+                        Margin="0,0,10,0"
+                        Click="RoutesButton_Click"/>
 
+                <Button x:Name="AccessibilityButton"
+                        Content="Accessibility"
+                        Width="135"
+                        Height="36"
+                        Margin="0,0,10,0"
+                        Click="AccessibilityButton_Click"/>
+
+                <Button x:Name="AdminButton"
+                        Content="Administration"
+                        Width="135"
+                        Height="36"
+                        Margin="0,0,10,0"
+                        Click="AdminButton_Click"/>
+
+                <Button x:Name="SettingsButton"
+                        Content="Settings"
+                        Width="110"
+                        Height="36"
+                        Click="SettingsButton_Click"/>
+
+            </StackPanel>
+
+        </Border>
+
+
+        <!-- =====================================================
+             SEARCH
+             ===================================================== -->
+
+        <Border Grid.Row="2"
+                Background="{DynamicResource CardBackgroundBrush}"
+                BorderBrush="{DynamicResource BorderBrush}"
+                BorderThickness="1"
+                CornerRadius="10"
+                Padding="16"
+                Margin="0,0,0,20">
+
+            <Grid>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="380"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+
+                <TextBlock Grid.Column="0"
+                           Text="Search Buildings"
+                           VerticalAlignment="Center"
+                           FontSize="14"
+                           FontWeight="SemiBold"
+                           Margin="0,0,14,0"/>
+
+
+                <TextBox x:Name="SearchTextBox"
+                         Grid.Column="1"
+                         Height="36"
+                         Margin="0,0,10,0"
+                         VerticalContentAlignment="Center"/>
+
+
+                <Button x:Name="SearchButton"
+                        Grid.Column="2"
+                        Content="Search"
+                        Width="100"
+                        Height="36"
+                        Click="SearchButton_Click"/>
+
+
+                <TextBlock Grid.Column="3"
+                           Text="Search by building name or type"
+                           Foreground="{DynamicResource MutedTextBrush}"
+                           FontSize="12"
+                           VerticalAlignment="Center"
+                           Margin="15,0,0,0"/>
+
+            </Grid>
+
+        </Border>
+
+
+        <!-- =====================================================
+             MAIN CONTENT
+             ===================================================== -->
+
+        <Grid Grid.Row="3">
+
+            <Grid.ColumnDefinitions>
+
+                <!-- Building form -->
+                <ColumnDefinition Width="350"/>
+
+                <!-- Space between cards -->
+                <ColumnDefinition Width="20"/>
+
+                <!-- Building table -->
+                <ColumnDefinition Width="*"/>
+
+            </Grid.ColumnDefinitions>
+
+
+            <!-- =================================================
+                 MANAGE BUILDING CARD
+                 ================================================= -->
+
+            <Border Grid.Column="0"
+                    Background="{DynamicResource CardBackgroundBrush}"
+                    BorderBrush="{DynamicResource BorderBrush}"
+                    BorderThickness="1"
+                    CornerRadius="12"
+                    Padding="22">
+
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+
+                    <StackPanel>
+
+
+                        <!-- Card Heading -->
+
+                        <TextBlock Text="Manage Building"
+                                   FontSize="21"
+                                   FontWeight="Bold"/>
+
+                        <TextBlock Text="Add, edit, or remove campus buildings."
+                                   FontSize="12"
+                                   Foreground="{DynamicResource MutedTextBrush}"
+                                   Margin="0,4,0,20"/>
+
+
+                        <!-- Building Name -->
+
+                        <TextBlock Text="Building Name"
+                                   FontWeight="SemiBold"/>
+
+                        <TextBox x:Name="BuildingNameTextBox"
+                                 Height="34"
+                                 Margin="0,6,0,14"
+                                 VerticalContentAlignment="Center"/>
+
+
+                        <!-- Building Type -->
+
+                        <TextBlock Text="Building Type"
+                                   FontWeight="SemiBold"/>
+
+                        <TextBox x:Name="BuildingTypeTextBox"
+                                 Height="34"
+                                 Margin="0,6,0,14"
+                                 VerticalContentAlignment="Center"/>
+
+
+                        <!-- Opening / Closing Hours -->
+
+                        <Grid Margin="0,0,0,14">
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="14"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+
+                            <StackPanel Grid.Column="0">
+
+                                <TextBlock Text="Opening Hours"
+                                           FontWeight="SemiBold"/>
+
+                                <TextBox x:Name="OpeningHoursTextBox"
+                                         Height="34"
+                                         Margin="0,6,0,0"
+                                         VerticalContentAlignment="Center"/>
+
+                            </StackPanel>
+
+
+                            <StackPanel Grid.Column="2">
+
+                                <TextBlock Text="Closing Hours"
+                                           FontWeight="SemiBold"/>
+
+                                <TextBox x:Name="ClosingHoursTextBox"
+                                         Height="34"
+                                         Margin="0,6,0,0"
+                                         VerticalContentAlignment="Center"/>
+
+                            </StackPanel>
+
+                        </Grid>
+
+
+                        <!-- Latitude / Longitude -->
+
+                        <Grid Margin="0,0,0,14">
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="14"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+
+                            <StackPanel Grid.Column="0">
+
+                                <TextBlock Text="Latitude"
+                                           FontWeight="SemiBold"/>
+
+                                <TextBox x:Name="LatitudeTextBox"
+                                         Height="34"
+                                         Margin="0,6,0,0"
+                                         VerticalContentAlignment="Center"/>
+
+                            </StackPanel>
+
+
+                            <StackPanel Grid.Column="2">
+
+                                <TextBlock Text="Longitude"
+                                           FontWeight="SemiBold"/>
+
+                                <TextBox x:Name="LongitudeTextBox"
+                                         Height="34"
+                                         Margin="0,6,0,0"
+                                         VerticalContentAlignment="Center"/>
+
+                            </StackPanel>
+
+                        </Grid>
+
+
+                        <!-- Description -->
+
+                        <TextBlock Text="Description"
+                                   FontWeight="SemiBold"/>
+
+                        <TextBox x:Name="DescriptionTextBox"
+                                 Height="72"
+                                 Margin="0,6,0,14"
+                                 Padding="8"
+                                 TextWrapping="Wrap"
+                                 AcceptsReturn="True"
+                                 VerticalContentAlignment="Top"
+                                 VerticalScrollBarVisibility="Auto"/>
+
+
+                        <!-- Address -->
+
+                        <TextBlock Text="Address"
+                                   FontWeight="SemiBold"/>
+
+                        <ComboBox x:Name="AddressComboBox"
+                                 Height="36"
+                                 Margin="0,6,0,20"
+                                  Foreground="Black"
+                                  Background="White"/>
+
+
+                        <!-- CRUD Buttons -->
+
+                        <Grid>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="8"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="8"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+
+                            <Button x:Name="AddBuildingButton"
+                                    Grid.Column="0"
+                                    Content="Add"
+                                    Height="38"
+                                    Click="AddBuildingButton_Click"/>
+
+
+                            <Button x:Name="UpdateBuildingButton"
+                                    Grid.Column="2"
+                                    Content="Update"
+                                    Height="38"
+                                    Click="UpdateBuildingButton_Click"/>
+
+
+                            <Button x:Name="DeleteBuildingButton"
+                                    Grid.Column="4"
+                                    Content="Delete"
+                                    Height="38"
+                                    Click="DeleteBuildingButton_Click"/>
+
+                        </Grid>
+
+                    </StackPanel>
+
+                </ScrollViewer>
+
+            </Border>
+
+
+            <!-- =================================================
+                 CAMPUS BUILDINGS CARD
+                 ================================================= -->
+
+            <Border Grid.Column="2"
+                    Background="{DynamicResource CardBackgroundBrush}"
+                    BorderBrush="{DynamicResource BorderBrush}"
+                    BorderThickness="1"
+                    CornerRadius="12"
+                    Padding="22">
+
+                <Grid>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+
+                    <!-- Table Heading -->
+
+                    <Grid Grid.Row="0"
+                          Margin="0,0,0,18">
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+
+                        <StackPanel Grid.Column="0">
+
+                            <TextBlock Text="Campus Buildings"
+                                       FontSize="21"
+                                       FontWeight="Bold"/>
+
+                            <TextBlock Text="Select a building to edit or delete it."
+                                       FontSize="12"
+                                       Foreground="{DynamicResource MutedTextBrush}"
+                                       Margin="0,4,0,0"/>
+
+                        </StackPanel>
+
+                    </Grid>
+
+
+                    <!-- Building Data -->
+
+                    <DataGrid x:Name="BuildingDataGrid"
+                              Grid.Row="1"
+                              AutoGenerateColumns="False"
+                              IsReadOnly="True"
+                              SelectionMode="Single"
+                              SelectionUnit="FullRow"
+                              SelectionChanged="BuildingDataGrid_SelectionChanged">
+
+                        <DataGrid.Columns>
+
+                            <DataGridTextColumn Header="Building"
+                                                Binding="{Binding BuildingName}"
+                                                Width="2*"/>
+
+                            <DataGridTextColumn Header="Type"
+                                                Binding="{Binding BuildingType}"
+                                                Width="*"/>
+
+                            <DataGridTextColumn Header="Opening"
+                                                Binding="{Binding OpeningHours}"
+                                                Width="*"/>
+
+                            <DataGridTextColumn Header="Closing"
+                                                Binding="{Binding ClosingHours}"
+                                                Width="*"/>
+
+                            <DataGridTextColumn Header="Description"
+                                                Binding="{Binding BuildingDescription}"
+                                                Width="3*"/>
+
+                        </DataGrid.Columns>
+
+                    </DataGrid>
+
+                </Grid>
+
+            </Border>
+
+        </Grid>
 
     </Grid>
+
 </Window>
