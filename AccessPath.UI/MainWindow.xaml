@@ -95,6 +95,13 @@
 
             <StackPanel Orientation="Horizontal">
 
+                <Button x:Name="BuildingsButton"
+                        Content="Buildings"
+                        Width="110"
+                        Height="36"
+                        Margin="0,0,10,0"
+                        Click="BuildingsButton_Click"/>
+
                 <Button x:Name="RoutesButton"
                         Content="Manage Routes"
                         Width="135"
@@ -131,7 +138,8 @@
              SEARCH
              ===================================================== -->
 
-        <Border Grid.Row="2"
+        <Border x:Name="BuildingSearchSection"
+                Grid.Row="2"
                 Background="{DynamicResource CardBackgroundBrush}"
                 BorderBrush="{DynamicResource BorderBrush}"
                 BorderThickness="1"
@@ -188,7 +196,8 @@
              MAIN CONTENT
              ===================================================== -->
 
-        <Grid Grid.Row="3">
+        <Grid x:Name="BuildingsContent"
+              Grid.Row="3">
 
             <Grid.ColumnDefinitions>
 
@@ -354,9 +363,7 @@
 
                         <ComboBox x:Name="AddressComboBox"
                                  Height="36"
-                                 Margin="0,6,0,20"
-                                  Foreground="Black"
-                                  Background="White"/>
+                                 Margin="0,6,0,20"/>
 
 
                         <!-- CRUD Buttons -->
@@ -488,6 +495,11 @@
             </Border>
 
         </Grid>
+
+        <ContentControl x:Name="MainContent"
+                Grid.Row="2"
+                Grid.RowSpan="2"
+                Visibility="Collapsed"/>
 
     </Grid>
 

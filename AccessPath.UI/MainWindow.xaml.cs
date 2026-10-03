@@ -1,7 +1,8 @@
 ﻿using System.Windows;
-using AccessPath.Data.Repositories;
-using AccessPath.Data.Models;
 using System.Windows.Controls;
+using AccessPath.Data.Models;
+using AccessPath.Data.Repositories;
+using AccessPath.UI.Views;
 
 namespace AccessPath.UI
 {
@@ -54,10 +55,22 @@ namespace AccessPath.UI
             BuildingDataGrid.ItemsSource = repository.SearchBuildings(searchTerm);
         }
 
+        private void BuildingsButton_Click(object sender, RoutedEventArgs e)
+        {
+            MainContent.Content = null;
+            MainContent.Visibility = Visibility.Collapsed;
+
+            BuildingSearchSection.Visibility = Visibility.Visible;
+            BuildingsContent.Visibility = Visibility.Visible;
+        }
+
         private void RoutesButton_Click(object sender, RoutedEventArgs e)
         {
-            RouteWindow routeWindow = new RouteWindow();
-            routeWindow.Show();
+            BuildingSearchSection.Visibility = Visibility.Collapsed;
+            BuildingsContent.Visibility = Visibility.Collapsed;
+
+            MainContent.Visibility = Visibility.Visible;
+            MainContent.Content = new RoutesView();
         }
 
         private void AccessibilityButton_Click(object sender, RoutedEventArgs e)
