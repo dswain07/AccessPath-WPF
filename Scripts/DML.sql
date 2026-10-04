@@ -127,7 +127,7 @@ INSERT INTO Users
 VALUES
     (
         'admin',
-        'DEVELOPMENT_HASH_PLACEHOLDER',
+        'PBKDF2$600000$eLA16rfLhVB0FC0MaNVn4Q==$fEvbMO6u44Oa1vVe4kmws3iTEIT1SNHNbi8bJznVK/w=',
         'Dark',
         'Admin'
     ),

@@ -1,7 +1,7 @@
 <Solution>
   <Folder Name="/Scripts/">
-    <File Path="DDL.sql" />
-    <File Path="DML.sql" />
+    <File Path="Scripts/DDL.sql" />
+    <File Path="Scripts/DML.sql" />
   </Folder>
   <Project Path="AccessPath.Data/AccessPath.Data.csproj" />
   <Project Path="AccessPath.UI/AccessPath.UI.csproj" />

@@ -36,6 +36,15 @@ namespace AccessPath.UI
 
         private void AdminButton_Click(object sender, RoutedEventArgs e)
         {
+            AdminLoginView loginView = new AdminLoginView();
+
+            loginView.LoginSucceeded += AdminLoginView_LoginSucceeded;
+
+            MainContent.Content = loginView;
+        }
+
+        private void AdminLoginView_LoginSucceeded(object? sender, EventArgs e)
+        {
             MainContent.Content = new AdministrationView();
         }
 
