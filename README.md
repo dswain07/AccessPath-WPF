@@ -1,26 +1,21 @@
 # AccessPath
 
-AccessPath is a C# WPF desktop application for managing campus
-buildings, accessible routes, building accessibility features, and route
-reports. The project is designed around the University of South Carolina
-campus and demonstrates a multi-project WPF application connected to a
-SQL Server LocalDB database.
+AccessPath is a C# WPF desktop application for managing campus buildings, accessible routes, building accessibility features, and route reports. The project is designed around the University of South Carolina campus and demonstrates a multi-project desktop application connected to a SQL Server LocalDB database.
 
 ## Features
 
--   Single-window WPF interface with page-style navigation
--   Building management with Create, Read, Update, and Delete operations
--   Route management with Create, Read, Update, and Delete operations
--   Building accessibility management with Create, Read, Update, and
-    Delete operations
--   Building search by building name or building type
--   Address selection using existing database addresses
--   Administration view for reviewing route reports and updating report
-    status
--   Light and dark application themes
--   Live theme switching without restarting the application
--   Input validation and confirmation messages for database operations
--   SQL Server foreign-key relationships for relational data integrity
+- Single-window WPF interface with page-style navigation
+- Building management with Create, Read, Update, and Delete operations
+- Route management with Create, Read, Update, and Delete operations
+- Building accessibility management with Create, Read, Update, and Delete operations
+- Building search by building name and building type
+- Existing-address selection for building records
+- Administration view for reviewing route reports and updating report status
+- Admin authentication using PBKDF2 password hashing
+- Light and dark application themes
+- Live theme switching without restarting the application
+- Input validation and confirmation dialogs
+- SQL Server foreign-key relationships for relational data integrity
 
 ## Application Sections
 
@@ -28,111 +23,88 @@ SQL Server LocalDB database.
 
 The Buildings section allows users to:
 
--   View campus buildings
--   Search by building name or building type
--   Add a building
--   Update a selected building
--   Delete a selected building
--   Select a valid address from the Addresses table
+- View campus buildings
+- Search by building name or building type
+- Add a building
+- Update a selected building
+- Delete a selected building
+- Select a valid address from the Addresses table
 
 ### Manage Routes
 
 The Routes section allows users to:
 
--   View existing campus routes
--   Select starting and destination buildings
--   Add routes
--   Update routes
--   Delete routes
--   Assign route status, distance, estimated travel time, and
-    descriptions
+- View existing campus routes
+- Select starting and destination buildings
+- Add, update, and delete routes
+- Assign route status, distance, estimated travel time, and descriptions
 
 ### Accessibility
 
-The Accessibility section manages accessibility features associated with
-campus buildings.
-
-Examples include:
-
--   Accessible entrances
--   Elevators
--   Wheelchair ramps
--   Other building-specific accessibility information
-
-The section supports full Create, Read, Update, and Delete
-functionality.
+The Accessibility section manages accessibility features associated with campus buildings and supports full Create, Read, Update, and Delete functionality.
 
 ### Administration
 
-The Administration section displays submitted route reports and allows
-an administrator to update report statuses.
+The Administration section displays submitted route reports and allows an authenticated administrator to update report statuses.
 
 Supported statuses include:
 
--   Pending
--   Reviewed
--   Resolved
--   Rejected
+- Pending
+- Reviewed
+- Resolved
+- Rejected
+
+Administration is protected by username/password authentication. Password verification uses PBKDF2 hashing and the authenticated account must have the `Admin` role.
 
 ### Settings
 
-The Settings section allows the application theme to be changed between:
-
--   Light
--   Dark
-
-Theme changes are applied while the application is running and do not
-require a restart.
+The Settings section allows the application theme to be changed between Light and Dark. Theme changes are applied immediately without restarting AccessPath.
 
 ## Architecture
 
-AccessPath is separated into two main Visual Studio projects.
+AccessPath is separated into two Visual Studio projects.
 
 ### AccessPath.UI
 
-`AccessPath.UI` contains the WPF presentation layer.
+Contains the WPF presentation layer and application shell.
 
 Important components include:
 
--   `MainWindow.xaml` - application shell and navigation
--   `Views/BuildingsView.xaml`
--   `Views/RoutesView.xaml`
--   `Views/AccessibilityView.xaml`
--   `Views/AdministrationView.xaml`
--   `Views/SettingsView.xaml`
--   `Themes/LightTheme.xaml`
--   `Themes/DarkTheme.xaml`
--   `Services/ThemeManager.cs`
+- `MainWindow.xaml` - application shell and navigation
+- `Views/BuildingsView.xaml`
+- `Views/RoutesView.xaml`
+- `Views/AccessibilityView.xaml`
+- `Views/AdministrationView.xaml`
+- `Views/SettingsView.xaml`
+- `Views/AdminLoginView.xaml`
+- `Themes/LightTheme.xaml`
+- `Themes/DarkTheme.xaml`
+- `Services/ThemeManager.cs`
 
-The application uses a single-window design. `MainWindow` contains the
-navigation interface and loads the selected view into its main content
-area.
+`MainWindow` contains the navigation interface and loads the selected view into its main content area.
 
 ### AccessPath.Data
 
-`AccessPath.Data` is a separate Class Library containing the
-application's data-access functionality.
+A separate Class Library containing the data-access layer.
 
 It contains:
 
--   Database connection logic
--   Data models
--   Repository classes
--   SQL Server operations using `Microsoft.Data.SqlClient`
+- Database connection logic
+- Data models
+- Repository classes
+- Password hashing / verification utilities
+- SQL Server operations using `Microsoft.Data.SqlClient`
 
-The UI project references the Data project rather than directly
-executing SQL commands.
+The architecture is:
 
-The overall architecture is:
-
-``` text
+```text
 AccessPath.UI
      |
      v
 AccessPath.Data
      |
      v
-Repositories / Microsoft.Data.SqlClient
+Repositories / Security / Microsoft.Data.SqlClient
      |
      v
 SQL Server LocalDB
@@ -140,84 +112,81 @@ SQL Server LocalDB
 
 ## Database
 
-The AccessPath database contains seven related tables.
+The AccessPath database contains seven tables, satisfying the graduate requirement of five or more tables.
 
-The project includes SQL scripts in the `Scripts` directory:
+Database scripts are stored in:
 
-``` text
+```text
 Scripts/
 ├── DDL.sql
 └── DML.sql
 ```
 
-### DDL.sql
+Run the scripts in this order when recreating the database:
 
-Creates the AccessPath database structure, including tables, primary
-keys, foreign keys, and other constraints.
+1. `DDL.sql`
+2. `DML.sql`
 
-### DML.sql
-
-Populates the database with initial sample data used by the application.
-
-To recreate the database, execute the scripts in this order:
-
-1.  `DDL.sql`
-2.  `DML.sql`
-
-## Data Access
-
-The application uses the repository pattern to separate database
-operations from the WPF user interface.
-
-Examples include:
-
--   `BuildingRepository`
--   `AddressRepository`
--   `RouteRepository`
--   `BuildingAccessibilityRepository`
--   `RouteReportRepository`
-
-Parameterized SQL commands are used for database operations.
+The seed data includes an administrator account suitable for demonstrating the protected Administration view. The repository stores a password hash, not a plaintext password.
 
 ## CRUD Implementation
 
-Full CRUD functionality is implemented for three database entities:
-
-  Entity                   Create   Read   Update   Delete
-  ------------------------ -------- ------ -------- --------
-  Buildings                Yes      Yes    Yes      Yes
-  Routes                   Yes      Yes    Yes      Yes
-  Building Accessibility   Yes      Yes    Yes      Yes
+| Entity | Create | Read | Update | Delete |
+| --- | --- | --- | --- | --- |
+| Buildings | Yes | Yes | Yes | Yes |
+| Routes | Yes | Yes | Yes | Yes |
+| Building Accessibility | Yes | Yes | Yes | Yes |
 
 ## Search
 
-The Buildings section supports text-based searching across two building
-fields:
+The Buildings section supports text-based search across two building fields:
 
--   Building name
--   Building type
+- Building name
+- Building type
+
+## Authentication
+
+The optional Administration password feature was implemented using PBKDF2 with a random salt. A stored password uses the following general format:
+
+```text
+PBKDF2$iterations$salt$hash
+```
+
+The application verifies the entered password against the stored hash and then checks that the authenticated user has the `Admin` role before loading the Administration view.
+
+## Theme Support
+
+AccessPath uses WPF ResourceDictionaries:
+
+```text
+AccessPath.UI/Themes/LightTheme.xaml
+AccessPath.UI/Themes/DarkTheme.xaml
+```
+
+`ThemeManager` replaces the active resource dictionary at runtime, allowing Light/Dark switching without restarting the application.
 
 ## Technology Stack
 
--   C#
--   WPF
--   .NET 10
--   SQL Server LocalDB
--   Microsoft.Data.SqlClient
--   XAML
--   Git
--   GitHub
--   Visual Studio
+- C#
+- WPF
+- .NET 10
+- SQL Server LocalDB
+- Microsoft.Data.SqlClient
+- XAML
+- Git
+- GitHub
+- Visual Studio
 
 ## Project Structure
 
-``` text
+```text
 AccessPath-WPF/
 │
 ├── AccessPath.Data/
 │   ├── Database/
 │   ├── Models/
 │   ├── Repositories/
+│   ├── Security/
 │   └── AccessPath.Data.csproj
 │
 ├── AccessPath.UI/
@@ -239,35 +208,21 @@ AccessPath-WPF/
 
 ## Running the Application
 
-1.  Clone the repository.
-2.  Open `AccessPath.slnx` in Visual Studio.
-3.  Ensure SQL Server LocalDB is installed and available.
-4.  Execute `Scripts/DDL.sql`.
-5.  Execute `Scripts/DML.sql`.
-6.  Verify the connection string in
-    `AccessPath.Data/Database/DatabaseConnection.cs`.
-7.  Set `AccessPath.UI` as the startup project if necessary.
-8.  Build the solution.
-9.  Run the application.
+1. Clone the repository.
+2. Open `AccessPath.slnx` in Visual Studio.
+3. Ensure SQL Server LocalDB is installed and available.
+4. Execute `Scripts/DDL.sql`.
+5. Execute `Scripts/DML.sql`.
+6. Verify the connection string in `AccessPath.Data/Database/DatabaseConnection.cs`.
+7. Set `AccessPath.UI` as the startup project if necessary.
+8. Build the solution.
+9. Run the application.
 
-## Theme Support
-
-AccessPath uses WPF resource dictionaries for application-wide styling:
-
-``` text
-AccessPath.UI/Themes/LightTheme.xaml
-AccessPath.UI/Themes/DarkTheme.xaml
-```
-
-`ThemeManager` replaces the active resource dictionary at runtime,
-allowing the application to switch themes without restarting.
-
-## Repository
-
-This repository contains the source code, database scripts, and project
-files required to build and run AccessPath.
 
 ## Academic Project
 
-AccessPath was developed as a WPF database application for CSCE 547
-Windows Programming.
+AccessPath was developed as a WPF database application for CSCE 547 Windows Programming.
+
+## Author
+
+Divyashanu Swain
