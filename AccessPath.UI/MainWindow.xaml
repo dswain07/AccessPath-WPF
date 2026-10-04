@@ -95,7 +95,7 @@
                         Margin="0,0,10,0"
                         Click="BuildingsButton_Click"/>
 
-                <Button Content="Manage Routes"
+                <Button Content="Routes"
                         Width="135"
                         Height="36"
                         Margin="0,0,10,0"
